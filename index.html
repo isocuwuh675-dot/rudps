@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ДПС Контроль — Умный Антирадар</title>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5G910R9XND"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5G910R9XND');
-</script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5G910R9XND"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5G910R9XND');
+    </script>
+    
     <style>
         /* БАЗОВЫЕ НАСТРОЙКИ */
         :root {
@@ -32,10 +32,12 @@
         }
 
         body {
-            background-color: var(--bg-dark);
+            /* Улучшенный фон: добавлен глубокий радиальный градиент */
+            background: radial-gradient(circle at center, #1a1a1a 0%, var(--bg-dark) 100%);
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         /* АНИМИРОВАННЫЙ ФОН */
@@ -46,42 +48,6 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-        }
-
-        /* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА */
-        .lang-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 8px;
-            background: var(--glass-bg);
-            padding: 5px;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-dim);
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        .lang-btn:hover { color: var(--text-main); }
-        .lang-btn.active {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 0 15px rgba(255, 214, 0, 0.3);
         }
 
         /* ГЕРОЙ-СЕКЦИЯ */
@@ -139,6 +105,7 @@
             border-radius: 50px;
             transition: all 0.3s ease;
             box-shadow: 0 0 15px rgba(255, 214, 0, 0.2);
+            cursor: pointer;
         }
 
         .btn-main:hover {
@@ -182,7 +149,6 @@
             gap: 12px;
         }
 
-        /* Стили для SVG иконок */
         .glass-card h3 svg {
             width: 28px;
             height: 28px;
@@ -201,25 +167,12 @@
         .review-name { font-weight: 700; margin-bottom: 5px; display: block; color: var(--text-main); }
         .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 10px; display: block; }
 
-        /* FAQ */
-        /* Находим твой существующий класс FAQ и добавляем/меняем отступы */
-.faq-section {
-    max-width: 800px;
-    margin: 0 auto;
-    padding-top: 80px;      /* Отступ сверху */
-    padding-bottom: 20px;   /* ДЕЛАЕМ МЕНЬШЕ ОТСТУП СНИЗУ (было 80px) */
-}
-
-/* Добавляем стили для новой секции с кнопкой */
-.download-section {
-    text-align: center;
-    padding-top: 20px;      /* Небольшой отступ от FAQ */
-    padding-bottom: 80px;   /* Отступ снизу до подвала (футера) */
-}
+        /* FAQ И СКАЧИВАНИЕ */
         .faq-section {
             max-width: 800px;
             margin: 0 auto;
-            padding: 80px 20px;
+            padding-top: 80px;      
+            padding-bottom: 20px;   
         }
 
         .faq-section h2 {
@@ -268,6 +221,12 @@
             padding: 10px 20px 20px;
         }
 
+        .download-section {
+            text-align: center;
+            padding-top: 20px;      
+            padding-bottom: 80px;   
+        }
+
         /* ПОДВАЛ */
         footer {
             text-align: center;
@@ -282,8 +241,6 @@
             .hero h1 { font-size: 2rem; }
             .hero p { font-size: 1rem; }
             .content-section { padding: 40px 20px; }
-            .lang-switcher { top: 10px; right: 10px; }
-            .lang-btn { padding: 4px 8px; font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -291,22 +248,14 @@
 
     <canvas id="bg-canvas"></canvas>
 
-    <nav class="lang-switcher">
-        <button class="lang-btn" onclick="setLanguageManually('ru')" id="btn-ru">RU</button>
-        <button class="lang-btn" onclick="setLanguageManually('kk')" id="btn-kk">KK</button>
-        <button class="lang-btn" onclick="setLanguageManually('ky')" id="btn-ky">KY</button>
-        <button class="lang-btn" onclick="setLanguageManually('uz')" id="btn-uz">UZ</button>
-    </nav>
-
     <section class="hero">
         <img src="лого пнг.png" alt="Логотип ДПС Контроль" class="logo-main">
-        <h1 data-i18n="title">ДПС <span>Контроль</span></h1>
-        <p data-i18n="hero_desc">Технология, которая видит дальше. Умный антирадар и навигатор, созданный водителями для водителей.</p>
-        <a  class="btn-main" data-i18n="btn_download">Скачать приложение</a>
+        <h1>ДПС <span>Контроль</span></h1>
+        <p>Технология, которая видит дальше. Умный антирадар и навигатор, созданный водителями для водителей.</p>
+        <a href="https://github.com/isocuwuh675-dot/rudps/releases/download/apk/DPS_RADAR.apk" class="btn-main" onclick="gtag('event', 'download_radar_click');">Скачать приложение</a>
     </section>
 
     <section class="content-section">
-        
         <div class="glass-card" style="border-color: var(--accent); box-shadow: 0 0 20px rgba(255, 214, 0, 0.2);">
             <h3>
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -316,9 +265,9 @@
                     <line x1="8" y1="16" x2="8.01" y2="16"></line>
                     <line x1="16" y1="16" x2="16.01" y2="16"></line>
                 </svg>
-                <span data-i18n="card6_title">Нейро-перехват камер</span>
+                <span>Нейро-перехват камер</span>
             </h3>
-            <p data-i18n="card6_desc">Наш ИИ в реальном времени сканирует открытые городские камеры. Нейросеть распознает патрульные машины по раскраске и маячкам, предупреждая о засаде раньше всех.</p>
+            <p>Наш ИИ в реальном времени сканирует открытые городские камеры. Нейросеть распознает патрульные машины по раскраске и маячкам, предупреждая о засаде раньше всех.</p>
         </div>
 
         <div class="glass-card">
@@ -328,9 +277,9 @@
                     <circle cx="12" cy="12" r="6"></circle>
                     <circle cx="12" cy="12" r="2"></circle>
                 </svg>
-                <span data-i18n="card1_title">Радар нового поколения</span>
+                <span>Радар нового поколения</span>
             </h3>
-            <p data-i18n="card1_desc">Наши алгоритмы анализируют маршрут и предупреждают о камерах на полосу, контроле светофоров и стационарных радарах.</p>
+            <p>Наши алгоритмы анализируют маршрут и предупреждают о камерах на полосу, контроле светофоров и стационарных радарах.</p>
         </div>
         
         <div class="glass-card">
@@ -341,9 +290,9 @@
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span data-i18n="card2_title">Сила сообщества</span>
+                <span>Сила сообщества</span>
             </h3>
-            <p data-i18n="card2_desc">Видите засаду полиции, ДТП или опасную яму? Нажмите одну кнопку, и за секунду об этом узнают все водители поблизости.</p>
+            <p>Видите засаду полиции, ДТП или опасную яму? Нажмите одну кнопку, и за секунду об этом узнают все водители поблизости.</p>
         </div>
 
         <div class="glass-card">
@@ -352,9 +301,9 @@
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                     <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <span data-i18n="card3_title">Отметки патрулей</span>
+                <span>Отметки патрулей</span>
             </h3>
-            <p data-i18n="card3_desc">Пользователи в реальном времени отмечают на карте расположение мобильных постов. Будьте проинформированы об актуальной ситуации.</p>
+            <p>Пользователи в реальном времени отмечают на карте расположение мобильных постов. Будьте проинформированы об актуальной ситуации.</p>
         </div>
 
         <div class="glass-card">
@@ -365,9 +314,9 @@
                     <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
                     <line x1="12" y1="20" x2="12.01" y2="20"></line>
                 </svg>
-                <span data-i18n="card4_title">Работа без интернета</span>
+                <span>Работа без интернета</span>
             </h3>
-            <p data-i18n="card4_desc">Загрузите базу камер и опасностей вашего региона заранее. Приложение работает исключительно по спутникам GPS, экономя ваш трафик.</p>
+            <p>Загрузите базу камер и опасностей вашего региона заранее. Приложение работает исключительно по спутникам GPS, экономя ваш трафик.</p>
         </div>
 
         <div class="glass-card">
@@ -377,57 +326,56 @@
                     <circle cx="12" cy="12" r="3"></circle>
                     <line x1="1" y1="1" x2="23" y2="23"></line>
                 </svg>
-                <span data-i18n="card5_title">Режим невидимки</span>
+                <span>Режим невидимки</span>
             </h3>
-            <p data-i18n="card5_desc">Включите ДПС Контроль, запустите любимый навигатор или выключите экран. Голосовые подсказки вовремя предупредят вас об опасности.</p>
+            <p>Включите ДПС Контроль, запустите любимый навигатор или выключите экран. Голосовые подсказки вовремя предупредят вас об опасности.</p>
         </div>
     </section>
 
     <section class="content-section" style="padding-top: 20px;">
         <div class="glass-card review-card">
             <span class="stars">★★★★★</span>
-            <span class="review-name" data-i18n="rev1_name">Азамат</span>
-            <p data-i18n="rev1_text">"Лучшее приложение для дорог. В Казахстане работает идеально, все камеры видит заранее."</p>
+            <span class="review-name">Азамат</span>
+            <p>"Лучшее приложение для дорог. В Казахстане работает идеально, все камеры видит заранее."</p>
         </div>
         <div class="glass-card review-card">
             <span class="stars">★★★★★</span>
-            <span class="review-name" data-i18n="rev2_name">Бахыт</span>
-            <p data-i18n="rev2_text">"Очень помогает в Бишкеке. Теперь всегда в курсе, где стоят патрули. Респект разработчикам!"</p>
+            <span class="review-name">Бахыт</span>
+            <p>"Очень помогает в Бишкеке. Теперь всегда в курсе, где стоят патрули. Респект разработчикам!"</p>
         </div>
         <div class="glass-card review-card">
             <span class="stars">★★★★★</span>
-            <span class="review-name" data-i18n="rev3_name">Фаррух</span>
-            <p data-i18n="rev3_text">"Удобно, что работает без интернета. Скачал базу Ташкента и ездишь спокойно."</p>
+            <span class="review-name">Фаррух</span>
+            <p>"Удобно, что работает без интернета. Скачал базу Ташкента и ездишь спокойно."</p>
         </div>
     </section>
 
     <section class="faq-section">
-    <h2 data-i18n="faq_title">Частые вопросы</h2>
-    <div class="faq-item">
-        <div class="faq-question"><span data-i18n="q1">Приложение бесплатное?</span> <span>+</span></div>
-        <div class="faq-answer" data-i18n="a1">Да, базовый функционал антирадара и карты полностью бесплатен для всех.</div>
-    </div>
-    <div class="faq-item">
-        <div class="faq-question"><span data-i18n="q2">Это законно?</span> <span>+</span></div>
-        <div class="faq-answer" data-i18n="a2">Да, приложение использует открытые данные о камерах и GPS-координаты пользователей.</div>
-    </div>
-    <div class="faq-item">
-        <div class="faq-question"><span data-i18n="q3">Как работает нейросеть?</span> <span>+</span></div>
-        <div class="faq-answer" data-i18n="a3">Наш ИИ анализирует публичные трансляции городских камер, программно вычисляя спецтранспорт в потоке, и наносит эти данные на карту.</div>
-    </div>
-</section>
+        <h2>Частые вопросы</h2>
+        <div class="faq-item">
+            <div class="faq-question"><span>Приложение бесплатное?</span> <span>+</span></div>
+            <div class="faq-answer">Да, базовый функционал антирадара и карты полностью бесплатен для всех.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><span>Это законно?</span> <span>+</span></div>
+            <div class="faq-answer">Да, приложение использует открытые данные о камерах и GPS-координаты пользователей.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><span>Как работает нейросеть?</span> <span>+</span></div>
+            <div class="faq-answer">Наш ИИ анализирует публичные трансляции городских камер, программно вычисляя спецтранспорт в потоке, и наносит эти данные на карту.</div>
+        </div>
+    </section>
 
-<section class="download-section">
-    <a href="https://github.com/isocuwuh675-dot/rudps/releases/download/apk/DPS_RADAR.apk" class="btn-main" data-i18n="btn_download" onclick="gtag('event', 'download_radar_click');">Скачать приложение</a>
-</section>
+    <section class="download-section">
+        <a href="https://github.com/isocuwuh675-dot/rudps/releases/download/apk/DPS_RADAR.apk" class="btn-main" onclick="gtag('event', 'download_radar_click');">Скачать приложение</a>
+    </section>
     
-
     <footer>
-        <p data-i18n="footer_text">&copy; 2026 ДПС Контроль. Ни гвоздя, ни жезла!</p>
+        <p>&copy; 2026 ДПС Контроль. Ни гвоздя, ни жезла!</p>
     </footer>
 
     <script>
-        /* --- ОРИГИНАЛЬНАЯ АНИМАЦИЯ ЧАСТИЦ --- */
+        /* --- АНИМАЦИЯ ЧАСТИЦ (Оптимизированная) --- */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
@@ -510,100 +458,6 @@
                 q.parentElement.classList.toggle('active');
             });
         });
-
-        /* --- ЛОГИКА ПЕРЕВОДОВ --- */
-        const translations = {
-            ru: {
-                title: "ДПС <span>Контроль</span>", hero_desc: "Технология, которая видит дальше. Умный антирадар и навигатор, созданный водителями для водителей.", btn_download: "Скачать приложение",
-                card6_title: "Нейро-перехват камер", card6_desc: "Наш ИИ в реальном времени сканирует открытые городские камеры. Нейросеть распознает патрульные машины по раскраске и маячкам, предупреждая о засаде раньше всех.",
-                card1_title: "Радар нового поколения", card1_desc: "Наши алгоритмы анализируют маршрут и предупреждают о камерах на полосу, контроле светофоров и стационарных радарах.",
-                card2_title: "Сила сообщества", card2_desc: "Карта оживает благодаря тысячам пользователей. Видите засаду полиции, ДТП или яму? Нажмите одну кнопку, и все об этом узнают.",
-                card3_title: "Отметки патрулей", card3_desc: "Пользователи в реальном времени отмечают на карте расположение мобильных постов. Будьте всегда проинформированы.",
-                card4_title: "Работа без интернета", card4_desc: "Загрузите базу камер и опасностей заранее. Приложение работает исключительно по спутникам GPS, экономя ваш трафик.",
-                card5_title: "Режим невидимки", card5_desc: "Включите ДПС Контроль, запустите любимый навигатор или выключите экран. Голосовые подсказки вовремя предупредят вас.",
-                rev1_name: "Азамат", rev1_text: "Лучшее приложение для дорог. В Казахстане работает идеально, все камеры видит заранее.",
-                rev2_name: "Бахыт", rev2_text: "Очень помогает в Бишкеке. Теперь всегда в курсе, где стоят патрули. Респект!",
-                rev3_name: "Фаррух", rev3_text: "Удобно, что работает без интернета. Скачал базу Ташкента и ездишь спокойно.",
-                faq_title: "Частые вопросы", q1: "Приложение бесплатное?", a1: "Да, базовый функционал антирадара полностью бесплатен.",
-                q2: "Это законно?", a2: "Да, приложение использует открытые данные о камерах и GPS-координаты.",
-                q3: "Как работает нейросеть?", a3: "Наш ИИ анализирует публичные трансляции городских камер, вычисляя спецтранспорт в потоке, и наносит эти данные на карту.",
-                footer_text: "&copy; 2026 ДПС Контроль. Ни гвоздя, ни жезла!"
-            },
-            kk: {
-                title: "ДПС <span>Контроль</span>", hero_desc: "Ары қарай көретін технология. Жүргізушілер үшін жүргізушілер жасаған ақылды антирадар мен навигатор.", btn_download: "Қосымшаны жүктеу",
-                card6_title: "Камераларды нейро-бақылау", card6_desc: "Біздің ЖИ нақты уақытта ашық қалалық камераларды сканерлейді. Нейрожелі патрульдік көліктерді түсі мен шамдары арқылы танып, буктурма туралы бәрінен бұрын ескертеді.",
-                card1_title: "Жаңа буын радары", card1_desc: "Біздің алгоритмдер бағытты талдайды және жолақтағы камералар мен радарлар туралы ескертеді.",
-                card2_title: "Қауымдастық күші", card2_desc: "Полиция буктурмасын көрдіңіз бе? Бір батырманы басыңыз, барлық жүргізушілер бұл туралы біледі.",
-                card3_title: "Патрульдер белгісі", card3_desc: "Пайдаланушылар нақты уақыт режимінде картада мобильді бекеттердің орналасуын белгілейді.",
-                card4_title: "Интернетсіз жұмыс", card4_desc: "Қауіптер базасын алдын ала жүктеп алыңыз. Қосымша тек GPS спутниктері арқылы жұмыс істейді.",
-                card5_title: "Көрінбейтін режим", card5_desc: "Қосымша фонда жұмыс істей алады. Дауыстық кеңестер сізді қауіп туралы уақытында ескертеді.",
-                rev1_name: "Алмас", rev1_text: "Жолдар үшін ең жақсы қосымша. Қазақстанда мінсіз жұмыс істейді.",
-                rev2_name: "Берік", rev2_text: "Алматыда өте көп көмектеседі. Патрульдердің қайда тұрғанын әрдайым білемін.",
-                rev3_name: "Марат", rev3_text: "Интернетсіз жұмыс істейтіні өте ыңғайлы. Базаны жүктеп алсаң болды.",
-                faq_title: "Жиі қойылатын сұрақтар", q1: "Қосымша тегін бе?", a1: "Иә, антирадар мен картаның негізгі функциялары тегін.",
-                q2: "Бұл заңды ма?", a2: "Иә, біз тек ашық деректер мен GPS координаттарын пайдаланамыз.",
-                q3: "Нейрожелі қалай жұмыс істейді?", a3: "ЖИ ашық қалалық камераларды талдап, полиция көліктерін картаға автоматты түрде түсіреді.",
-                footer_text: "&copy; 2026 ДПС Контроль. Ақ жол!"
-            },
-            ky: {
-                title: "ДПС <span>Контроль</span>", hero_desc: "Ары көрө алган технология. Айдоочулар үчүн айдоочулар тарабынан түзүлгөн акылдуу антирадар.", btn_download: "Тиркемени жүктөө",
-                card6_title: "Камераларды нейро-көзөмөлдөө", card6_desc: "Биздин КИ реалдуу убакытта ачык шаардык камераларды сканерлейт. Нейротүйүн патрулдук унааларды таанып, буктурма жөнүндө эң биринчи эскертет.",
-                card1_title: "Жаңы муундагы радар", card1_desc: "Биздин алгоритмдер маршрутту талдап, камералар жана радарлар жөнүндө эскертет.",
-                card2_title: "Коомчулуктун күчү", card2_desc: "Полиция буктурмасын көрдүңүзбү? Бир баскычты басыңыз, баары кабардар болушат.",
-                card3_title: "Патрулдардын белгиси", card3_desc: "Колдонуучулар реалдуу убакыт режиминде мобилдик посттордун жайгашкан жерин белгилешет.",
-                card4_title: "Интернетсиз иштөө", card4_desc: "Коркунучтар базасын алдын ала жүктөп алыңыз. Тиркеме GPS аркылуу гана иштейт.",
-                card5_title: "Көрүнбөс режим", card5_desc: "Тиркеме фондук режимде иштей алат. Үн кеңештери коркунуч жөнүндө өз убагында эскертет.",
-                rev1_name: "Улан", rev1_text: "Жолдор үчүн эң мыкты тиркеме. Бишкекте эң сонун иштейт.",
-                rev2_name: "Бахыт", rev2_text: "Абдан жардам берет. Эми патрулдардын кайда турганын дайыма билем.",
-                rev3_name: "Айбек", rev3_text: "Интернетсиз иштегени ыңгайлуу. Базаны жүктөп алып бейпил айдайсың.",
-                faq_title: "Суроо-жооптор", q1: "Тиркеме акысызбы?", a1: "Ооба, негизги функциялары толугу менен акысыз.",
-                q2: "Бул мыйзамдуубу?", a2: "Ооба, биз ачык маалыматтарды гана колдонобуз.",
-                q3: "Нейротүйүн кандай иштейт?", a3: "КИ шаардык камераларды талдап, полиция унааларын картага автоматтык түрдө киргизет.",
-                footer_text: "&copy; 2026 ДПС Контроль. Ак жол!"
-            },
-            uz: {
-                title: "DPS <span>Nazorat</span>", hero_desc: "Uzoqni ko'radigan texnologiya. Haydovchilar tomonidan yaratilgan aqlli antiradar va navigator.", btn_download: "Ilovani yuklab olish",
-                card6_title: "Kameralarni neyro-kuzatish", card6_desc: "Bizning SI real vaqtda ochiq shahar kameralarini skanerlaydi. Neyrotarmoq patrul mashinalarini rangi va chiroqlaridan tanib, hammadan oldin pistirma haqida ogohlantiradi.",
-                card1_title: "Yangi avlod radari", card1_desc: "Bizning algoritmlarimiz marshrutni tahlil qiladi va kameralar hamda radarlar haqida ogohlantiradi.",
-                card2_title: "Hamjamiyat kuchi", card2_desc: "Politsiya pistirmasini ko'rdingizmi? Bitta tugmani bosing va barcha haydovchilar bu haqda bilib olishadi.",
-                card3_title: "Patrul belgilari", card3_desc: "Foydalanuvchilar real vaqt rejimida mobil postlarning joylashuvini belgilaydilar.",
-                card4_title: "Internetsiz ishlash", card4_desc: "Xavf-xatarlar bazasini oldindan yuklab oling. Ilova faqat GPS orqali ishlaydi.",
-                card5_title: "Ko'rinmas rejim", card5_desc: "Ilova fonda ishlashi mumkin. Ovozli ko'rsatmalar xavf haqida o'z vaqtida ogohlantiradi.",
-                rev1_name: "Farrux", rev1_text: "Yo'llar uchun eng yaxshi ilova. O'zbekistonda ajoyib ishlaydi.",
-                rev2_name: "Dilshod", rev2_text: "Toshkentda juda ko'p yordam beradi. Patrullar qayerda turganini doim bilaman.",
-                rev3_name: "Jasur", rev3_text: "Internetsiz ishlashi juda qulay. Baza yuklab olib, xotirjam yurasiz.",
-                faq_title: "Ko'p so'raladigan savollar", q1: "Ilova bepulmi?", a1: "Ha, antiradarning asosiy funksiyalari mutlaqo bepul.",
-                q2: "Bu qonuniymi?", a2: "Ha, biz faqat ochiq ma'lumotlar va GPS koordinatalaridan foydalanamiz.",
-                q3: "Neyrotarmoq qanday ishlaydi?", a3: "SI shahar kameralarini tahlil qilib, politsiya mashinalarini avtomatik tarzda xaritaga kiritadi.",
-                footer_text: "&copy; 2026 ДПС Контроль. Oq yo'l!"
-            }
-        };
-
-        function updateUI(lang) {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) el.innerHTML = translations[lang][key];
-            });
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-${lang}`).classList.add('active');
-            document.documentElement.lang = lang;
-        }
-
-        function setLanguageManually(lang) {
-            localStorage.setItem('user_lang', lang); 
-            updateUI(lang);
-        }
-
-        function initLanguage() {
-            const savedLang = localStorage.getItem('user_lang');
-            if (savedLang && translations[savedLang]) {
-                updateUI(savedLang); return;
-            }
-            const browserLang = (navigator.language || navigator.userLanguage).substring(0, 2).toLowerCase();
-            const defaultLang = translations[browserLang] ? browserLang : 'ru';
-            updateUI(defaultLang);
-        }
-        document.addEventListener('DOMContentLoaded', initLanguage);
     </script>
 </body>
 </html>
